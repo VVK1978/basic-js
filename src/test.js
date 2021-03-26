@@ -1,38 +1,75 @@
-function repeater(str, options) {
-  let result = new String();
-  if (!options.separator) {
-    options.separator = "+";
+en = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+class VigenereCipheringMachine {
+  constructor(state = true) {
+    this.reverse = {
+      state,
+    };
   }
-  if (!options.repeatTimes) {
-    return (result = str + options.addition);
-  }
-  for (j = 1; j < options.repeatTimes + 1; j++) {
-    result += str;
 
-    for (i = 1; i < options.additionRepeatTimes + 1; i++) {
-      if (i != options.additionRepeatTimes) {
-        result += options.addition + options.additionSeparator;
-      } else {
-        result = result + options.addition;
+  encrypt() {
+    let args = [...arguments];
+
+    if (args.length != 2) {
+      throw "TROWN";
+    }
+    let str = args[0].toUpperCase().split("");
+    let key = args[1].toUpperCase().split("");
+    if (this.reverse.state === true) {
+		 str=str.reverse()
+	 }
+	 
+   console.log(str);
+
+    for (let i = 0; i < str.length; i++) {
+      if (key.length < str.length) {
+        key = key.concat(key);
       }
     }
-    if (j != options.repeatTimes) {
-      result += options.separator;
-    } else {
-      result = result;
-    }
+    let strNum = str.map((el) => (en.indexOf(el) >= 0 ? en.indexOf(el) : el));
+    let keyNum = strNum
+      .map((el, ind) =>
+        Number.isInteger(el) ? key[ind] : key.splice(ind, 0, "")
+      )
+      .map((el) => (en.indexOf(el) >= 0 ? en.indexOf(el) : el));
+
+    let res = strNum
+      .map((el, ind) => (Number.isInteger(el) ? el + keyNum[ind] : el))
+      .map((el) => (el > 25 ? el - 26 : el))
+      .map((el) => (Number.isInteger(el) ? en[el] : el))
+      .join("");
+    console.log(res);
+    return res;
   }
-  return result;
+  decrypt() {
+    let args = [...arguments];
+    if (args.length != 2) {
+      throw "TROWN";
+    }
+
+    let str = args[0].toUpperCase().split("");
+    let key = args[1].toUpperCase().split("");
+    for (let i = 0; i < str.length; i++) {
+      if (key.length < str.length) {
+        key = key.concat(key);
+      }
+    }
+    let strNum = str.map((el) => (en.indexOf(el) >= 0 ? en.indexOf(el) : el));
+    let keyNum = strNum
+      .map((el, ind) =>
+        Number.isInteger(el) ? key[ind] : key.splice(ind, 0, "")
+      )
+      .map((el) => (en.indexOf(el) >= 0 ? en.indexOf(el) : el));
+    let res = strNum
+      .map((el, ind) => (Number.isInteger(el) ? el - keyNum[ind] : el))
+      .map((el, ind) => (el < 0 ? 26 + strNum[ind] - keyNum[ind] : el))
+      .map((el) => (Number.isInteger(el) ? en[el] : el))
+      .join("");
+
+    console.log(strNum, keyNum, res);
+    return res;
+  }
 }
 
-console.log(
-  repeater("TESTstr", {
-    repeatTimes: undefined,
-    separator: "ds",
-    addition: "ADD!",
-    additionRepeatTimes: undefined,
-    additionSeparator: ")))000",
-  })
-);
-
-("9UXKEEt8AqIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDg1L467Kdqx29UXKEEt8AqIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDg1L467Kdqx29UXKEEt8AqIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDg1L467Kdqx29UXKEEt8AqIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDgU7L9D0f8pbIMqCarClDg");
+const directMachine = new VigenereCipheringMachine();
+directMachine.encrypt("Example of sequence: 1, 2, 3, 4.", "lilkey");
+directMachine.decrypt("PFLWTJP WQ CIOFMYMI: 1, 2, 3, 4.", "lilkey");
