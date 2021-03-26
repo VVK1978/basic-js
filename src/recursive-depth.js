@@ -1,5 +1,4 @@
 const CustomError = require("../extensions/custom-error");
-let i = 1;
 module.exports = class DepthCalculator {
   calculateDepth(arr) {
     return Array.isArray(arr)

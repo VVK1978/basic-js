@@ -11,7 +11,7 @@ class VigenereCipheringMachine {
 
     let args = [...arguments];
     if (args.length != 2) {
-      throw "TROWN";
+      throw new Error("TROWN");
     }
     let str = args[0].toUpperCase().split("");
     let key = args[1].toUpperCase().split("");
@@ -42,7 +42,7 @@ class VigenereCipheringMachine {
 
     let args = [...arguments];
     if (args.length != 2) {
-      throw new CustomError("TROWN");
+      throw new Error("TROWN");
     }
 
     let str = args[0].toUpperCase().split("");

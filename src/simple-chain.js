@@ -22,7 +22,7 @@ const chainMaker = {
       return this;
     }
     this.array = [];
-    throw Error("TROWN");
+    throw new Error("TROWN");
   },
   reverseChain() {
     this.array = this.array.reverse();

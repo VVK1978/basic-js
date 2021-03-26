@@ -10,15 +10,15 @@ class VigenereCipheringMachine {
     let args = [...arguments];
 
     if (args.length != 2) {
-      throw "TROWN";
+      throw Error("TROWN");
     }
     let str = args[0].toUpperCase().split("");
     let key = args[1].toUpperCase().split("");
     if (this.reverse.state === true) {
-		 str=str.reverse()
-	 }
-	 
-   console.log(str);
+      str = str.reverse();
+    }
+
+    console.log(str);
 
     for (let i = 0; i < str.length; i++) {
       if (key.length < str.length) {
@@ -43,7 +43,7 @@ class VigenereCipheringMachine {
   decrypt() {
     let args = [...arguments];
     if (args.length != 2) {
-      throw "TROWN";
+      throw Error("TROWN");
     }
 
     let str = args[0].toUpperCase().split("");
