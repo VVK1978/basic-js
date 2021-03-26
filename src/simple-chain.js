@@ -21,7 +21,8 @@ const chainMaker = {
       this.array.splice(position - 1, 1);
       return this;
     }
-    throw "TROWN";
+    this.array = [];
+    throw Error("TROWN");
   },
   reverseChain() {
     this.array = this.array.reverse();

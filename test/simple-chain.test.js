@@ -8,15 +8,15 @@ const chainMaker = require('../src/simple-chain.js');
 
 describe('Make chain!', () => {
     //Presence requirement
-    describe('variable presence', () => {
+     describe('variable presence', () => {
         it.optional('object chainMaker exists', () => {
             expect(chainMaker).to.exist;
             const type = typeof chainMaker;
             expect(type).to.be.equal('object');
         });
-    });
+    }); 
 
-    describe('base requirements', () => {
+      describe('base requirements', () => {
         it.optional('chaining works!', () => {
             assert.deepEqual(chainMaker.addLink(function() {}).addLink('2nd').addLink('3rd').removeLink(2).reverseChain().finishChain(),'( 3rd )~~( function() {} )');
         });
@@ -37,10 +37,10 @@ describe('Make chain!', () => {
             }
             assert.equal(res, 'THROWN');
         });
-    });
+    });  
 
     //Functional requirements
-    describe('functional requirements', () => {
+     describe('functional requirements', () => {
         it.optional('function returns correct values', () => {
             assert.deepEqual(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain(), '( null )~~( GHI )~~( 333 )~~( 0 )~~( GHI )');
             assert.deepEqual(chainMaker.addLink('8.963').reverseChain().reverseChain().reverseChain().reverseChain().addLink({0: 'first', 1: 'second', 'length': 2}).reverseChain().addLink(3.14).addLink('DEF').reverseChain().finishChain(), '( DEF )~~( 3.14 )~~( 8.963 )~~( [object Object] )');
@@ -150,5 +150,5 @@ describe('Make chain!', () => {
             assert.deepEqual(chainMaker.addLink(3.14).addLink(1).addLink({0: 'first', 1: 'second', 'length': 2}).removeLink(1).addLink('DEF').addLink({0: 'first', 1: 'second', 'length': 2}).removeLink(1).addLink(true).addLink(false).addLink(333).reverseChain().reverseChain().finishChain(), '( [object Object] )~~( DEF )~~( [object Object] )~~( true )~~( false )~~( 333 )');
             assert.deepEqual(chainMaker.addLink('ABC').reverseChain().reverseChain().addLink('DEF').removeLink(1).addLink({0: 'first', 1: 'second', 'length': 2}).reverseChain().addLink(1.233).addLink(1.233).reverseChain().addLink('ABC').finishChain(), '( 1.233 )~~( 1.233 )~~( DEF )~~( [object Object] )~~( ABC )');
         });
-    });
+    } );
 });

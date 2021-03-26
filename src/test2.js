@@ -5,9 +5,9 @@ let chainMaker = {
     return this.length;
   },
   addLink(value) {
-    console.log(typeof value);
-    if (value != undefined || value===null) {
-		 console.log("OK")
+    //console.log(typeof value);
+    if (value != undefined || value === null) {
+      //console.log("OK")
       this.str = "~( " + value + " )~";
       this.array.push(this.str);
       return this;
@@ -25,7 +25,7 @@ let chainMaker = {
     return this;
   },
   finishChain() {
-    console.log(typeof this.array.join("").slice(1, -1));
+    //console.log(typeof this.array.join("").slice(1, -1));
     return this.array.join("").slice(1, -1);
   },
 };
