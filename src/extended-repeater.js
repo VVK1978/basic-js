@@ -1,9 +1,13 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function repeater(str, options) {
-  let result = new String();
+  let result = "";
+  //console.log(str)
   if (!options.separator) {
     options.separator = "+";
+  }
+  if (!options.additionSeparator) {
+    options.additionSeparator = "|";
   }
   if (!options.repeatTimes) {
     return (result = str + options.addition);
@@ -26,3 +30,4 @@ module.exports = function repeater(str, options) {
   }
   return result;
 };
+/*  */
