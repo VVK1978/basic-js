@@ -1,31 +1,34 @@
 const CustomError = require("../extensions/custom-error");
 
-module.exports = function repeater(str, options) {
+module.exports = function repeater(
+  str,
+  {
+    repeatTimes = 1,
+    separator = "+",
+    addition = "",
+    additionRepeatTimes = 1,
+    additionSeparator='|' ,
+  }
+) {
   let result = "";
-  if (!options.separator) {
-    options.separator = "+";
+  if (!repeatTimes) {
+    return (result = str + addition);
   }
-  if (!options.additionSeparator) {
-    options.additionSeparator = "|";
-  }
-  if (!options.repeatTimes) {
-    return (result = str + options.addition);
-  }
-  for (j = 1; j < options.repeatTimes + 1; j++) {
+  for (j = 1; j < repeatTimes + 1; j++) {
     result += str;
 
-    if (!options.additionRepeatTimes && options.addition) {
-      result += options.addition;
+    if (!additionRepeatTimes && addition) {
+      result += addition;
     }
-    for (i = 1; i < options.additionRepeatTimes + 1; i++) {
-      if (i != options.additionRepeatTimes) {
-        result += options.addition + options.additionSeparator;
+    for (i = 1; i < additionRepeatTimes + 1; i++) {
+      if (i != additionRepeatTimes) {
+        result += addition + additionSeparator;
       } else {
-        result = result + options.addition;
+        result = result + addition;
       }
     }
-    if (j != options.repeatTimes) {
-      result += options.separator;
+    if (j != repeatTimes) {
+      result += separator;
     } else {
       result = result;
     }
